@@ -10,61 +10,15 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="### Truenas上安装独立的Home-assistant使用虚拟机部署
-**重要提醒** 在创建虚拟机之前先创建**2块数据集**（Dataset）格式为**Zvol**，分别存储下载的镜像文件和恢复的恢复的镜像系统盘
-**1. 创建虚拟机**
+<meta name="description" content="### Truenas上安装独立的HomeAssistantOS系统
+因TrueNAS商店的HomeAssistant有功能上的缺陷，所以需独立部署HAOS系统
 
-- 进入 **虚拟化 → 虚拟机**
-- 点击 **添加**
-- 配置：
-  **虚拟机基本配置**
-  -   名称: Homeassistant
-  -   描述: 独立 Home Assistant 实例
-  -   **硬盘选项：**选择创建好的系统镜像盘
-  -   系统和配置: 选择Linux和合适的内存和 CPU
-  -   **引导设备**: 选择**老毛桃PE.ISO**文件
-  -   **网卡选择**：**不要选VirtIO**
-  -   保存配置后不要急着启动
-      **添加硬盘**
-     找到虚拟机列表
-    1.点设备
-    2.添加设备
-    3.添加硬盘
-   4.添加之前创建好的 存放镜像文件的硬盘
-
-**2.下载镜像文件制作系统盘**
-
-1. 进入PE后启动网络
-2. 通过浏览器下载Homeassistant镜像文件，下载地址：https://www.home-assistant.io/installation/generic-x86-64/
-3. 下载完后解压得到IMG文件。">
+**重要提醒** 在创建虚拟机之前先创建**2块数据集**（Dataset）格式为**Zvol**，分别存储下载的镜像文件和系统盘。">
 <meta property="og:title" content="如何在Truenas上安装独立的Home-assistant">
-<meta property="og:description" content="### Truenas上安装独立的Home-assistant使用虚拟机部署
-**重要提醒** 在创建虚拟机之前先创建**2块数据集**（Dataset）格式为**Zvol**，分别存储下载的镜像文件和恢复的恢复的镜像系统盘
-**1. 创建虚拟机**
+<meta property="og:description" content="### Truenas上安装独立的HomeAssistantOS系统
+因TrueNAS商店的HomeAssistant有功能上的缺陷，所以需独立部署HAOS系统
 
-- 进入 **虚拟化 → 虚拟机**
-- 点击 **添加**
-- 配置：
-  **虚拟机基本配置**
-  -   名称: Homeassistant
-  -   描述: 独立 Home Assistant 实例
-  -   **硬盘选项：**选择创建好的系统镜像盘
-  -   系统和配置: 选择Linux和合适的内存和 CPU
-  -   **引导设备**: 选择**老毛桃PE.ISO**文件
-  -   **网卡选择**：**不要选VirtIO**
-  -   保存配置后不要急着启动
-      **添加硬盘**
-     找到虚拟机列表
-    1.点设备
-    2.添加设备
-    3.添加硬盘
-   4.添加之前创建好的 存放镜像文件的硬盘
-
-**2.下载镜像文件制作系统盘**
-
-1. 进入PE后启动网络
-2. 通过浏览器下载Homeassistant镜像文件，下载地址：https://www.home-assistant.io/installation/generic-x86-64/
-3. 下载完后解压得到IMG文件。">
+**重要提醒** 在创建虚拟机之前先创建**2块数据集**（Dataset）格式为**Zvol**，分别存储下载的镜像文件和系统盘。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://MTnetworks.github.io/mtwl-blog.github.io/post/ru-he-zai-Truenas-shang-an-zhuang-du-li-de-Home-assistant.html">
 <meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
@@ -125,9 +79,10 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><h3>Truenas上安装独立的Home-assistant使用虚拟机部署</h3>
-<p><strong>重要提醒</strong> 在创建虚拟机之前先创建<strong>2块数据集</strong>（Dataset）格式为<strong>Zvol</strong>，分别存储下载的镜像文件和恢复的恢复的镜像系统盘<br>
-<strong>1. 创建虚拟机</strong></p>
+<div class="markdown-body" id="postBody"><h3>Truenas上安装独立的HomeAssistantOS系统</h3>
+<p>因TrueNAS商店的HomeAssistant有功能上的缺陷，所以需独立部署HAOS系统</p>
+<p><strong>重要提醒</strong> 在创建虚拟机之前先创建<strong>2块数据集</strong>（Dataset）格式为<strong>Zvol</strong>，分别存储下载的镜像文件和系统盘。并提前下载好<a href="https://ubuntu.com/download/desktop" rel="nofollow">Ubuntu Desktop</a>镜像文件。</p>
+<p><strong>1. 创建虚拟机</strong></p>
 <ul>
 <li>进入 <strong>虚拟化 → 虚拟机</strong></li>
 <li>点击 <strong>添加</strong></li>
@@ -138,7 +93,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li>描述: 独立 Home Assistant 实例</li>
 <li>**硬盘选项：**选择创建好的系统镜像盘</li>
 <li>系统和配置: 选择Linux和合适的内存和 CPU</li>
-<li><strong>引导设备</strong>: 选择<strong>老毛桃PE.ISO</strong>文件</li>
+<li><strong>引导设备</strong>: 选择**<a href="https://ubuntu.com/download/desktop" rel="nofollow">Ubuntu Desktop instructions</a>.ISO**文件</li>
 <li><strong>网卡选择</strong>：<strong>不要选VirtIO</strong></li>
 <li>保存配置后不要急着启动<br>
 <strong>添加硬盘</strong><br>
@@ -150,13 +105,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </ul>
 </li>
 </ul>
-<p><strong>2.下载镜像文件制作系统盘</strong></p>
-<ol>
-<li>进入PE后启动网络</li>
-<li>通过浏览器下载Homeassistant镜像文件，下载地址：<a href="https://www.home-assistant.io/installation/generic-x86-64/" rel="nofollow">https://www.home-assistant.io/installation/generic-x86-64/</a></li>
-<li>下载完后解压得到IMG文件。</li>
-</ol>
-<p><strong>3.通过<a href="https://ubuntu.com/tutorials/try-ubuntu-before-you-install" rel="nofollow">Ubuntu Desktop试用版</a>进行安装Homeassistant系统</strong></p>
+<p><strong>2.通过<a href="https://ubuntu.com/download/desktop" rel="nofollow">Ubuntu Desktop试用版</a>进行安装Homeassistant系统</strong></p>
 <ol>
 <li>提前将Ubuntu Desktop镜像文件ISO放入共享文件里</li>
 <li>修改设备类型：将CD-ROM文件修改为Ubuntu Desktop镜像文件ISO</li>

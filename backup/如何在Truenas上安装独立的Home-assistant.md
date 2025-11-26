@@ -1,5 +1,8 @@
-### Truenas上安装独立的Home-assistant使用虚拟机部署
-**重要提醒** 在创建虚拟机之前先创建**2块数据集**（Dataset）格式为**Zvol**，分别存储下载的镜像文件和恢复的恢复的镜像系统盘
+### Truenas上安装独立的HomeAssistantOS系统
+因TrueNAS商店的HomeAssistant有功能上的缺陷，所以需独立部署HAOS系统
+
+**重要提醒** 在创建虚拟机之前先创建**2块数据集**（Dataset）格式为**Zvol**，分别存储下载的镜像文件和系统盘。并提前下载好[Ubuntu Desktop](https://ubuntu.com/download/desktop)镜像文件。
+
 **1. 创建虚拟机**
 
 - 进入 **虚拟化 → 虚拟机**
@@ -10,7 +13,7 @@
   -   描述: 独立 Home Assistant 实例
   -   **硬盘选项：**选择创建好的系统镜像盘
   -   系统和配置: 选择Linux和合适的内存和 CPU
-  -   **引导设备**: 选择**老毛桃PE.ISO**文件
+  -   **引导设备**: 选择**[Ubuntu Desktop instructions](https://ubuntu.com/download/desktop).ISO**文件
   -   **网卡选择**：**不要选VirtIO**
   -   保存配置后不要急着启动
       **添加硬盘**
@@ -20,13 +23,7 @@
     3.添加硬盘
    4.添加之前创建好的 存放镜像文件的硬盘
 
-**2.下载镜像文件制作系统盘**
-
-1. 进入PE后启动网络
-2. 通过浏览器下载Homeassistant镜像文件，下载地址：https://www.home-assistant.io/installation/generic-x86-64/
-3. 下载完后解压得到IMG文件。
-
-**3.通过[Ubuntu Desktop试用版](https://ubuntu.com/tutorials/try-ubuntu-before-you-install)进行安装Homeassistant系统**
+**2.通过[Ubuntu Desktop试用版](https://ubuntu.com/download/desktop)进行安装Homeassistant系统**
 
 1. 提前将Ubuntu Desktop镜像文件ISO放入共享文件里
 2. 修改设备类型：将CD-ROM文件修改为Ubuntu Desktop镜像文件ISO

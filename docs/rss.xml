@@ -1,32 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>铭泰网络的博客</title><link>https://MTnetworks.github.io/mtwl-blog.github.io</link><description>铭泰网络智能科技</description><copyright>铭泰网络的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://MTnetworks.github.io/mtwl-blog.github.io</link></image><lastBuildDate>Wed, 26 Nov 2025 09:23:53 +0000</lastBuildDate><managingEditor>铭泰网络的博客</managingEditor><ttl>60</ttl><webMaster>铭泰网络的博客</webMaster><item><title>Home Assistant服务器搭建和安装HACS商店</title><link>https://MTnetworks.github.io/mtwl-blog.github.io/post/Home%20Assistant-fu-wu-qi-da-jian-he-an-zhuang-HACS-shang-dian.html</link><description>### Home Assistant服务器搭建
-搭建 Home Assistant 服务器是一个非常有趣且实用的项目，它能让你彻底掌控自己的智能家居，实现高度自动化和隐私保护。</description><guid isPermaLink="true">https://MTnetworks.github.io/mtwl-blog.github.io/post/Home%20Assistant-fu-wu-qi-da-jian-he-an-zhuang-HACS-shang-dian.html</guid><pubDate>Tue, 25 Nov 2025 07:43:04 +0000</pubDate></item><item><title>如何在Truenas上安装独立的Home-assistant</title><link>https://MTnetworks.github.io/mtwl-blog.github.io/post/ru-he-zai-Truenas-shang-an-zhuang-du-li-de-Home-assistant.html</link><description>### Truenas上安装独立的Home-assistant使用虚拟机部署
-**重要提醒** 在创建虚拟机之前先创建**2块数据集**（Dataset）格式为**Zvol**，分别存储下载的镜像文件和恢复的恢复的镜像系统盘
-**1. 创建虚拟机**
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>铭泰网络的博客</title><link>https://MTnetworks.github.io/mtwl-blog.github.io</link><description>铭泰网络智能科技</description><copyright>铭泰网络的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://MTnetworks.github.io/mtwl-blog.github.io</link></image><lastBuildDate>Wed, 26 Nov 2025 14:59:16 +0000</lastBuildDate><managingEditor>铭泰网络的博客</managingEditor><ttl>60</ttl><webMaster>铭泰网络的博客</webMaster><item><title>Home Assistant服务器搭建和安装HACS商店</title><link>https://MTnetworks.github.io/mtwl-blog.github.io/post/Home%20Assistant-fu-wu-qi-da-jian-he-an-zhuang-HACS-shang-dian.html</link><description>### Home Assistant服务器搭建
+搭建 Home Assistant 服务器是一个非常有趣且实用的项目，它能让你彻底掌控自己的智能家居，实现高度自动化和隐私保护。</description><guid isPermaLink="true">https://MTnetworks.github.io/mtwl-blog.github.io/post/Home%20Assistant-fu-wu-qi-da-jian-he-an-zhuang-HACS-shang-dian.html</guid><pubDate>Tue, 25 Nov 2025 07:43:04 +0000</pubDate></item><item><title>如何在Truenas上安装独立的Home-assistant</title><link>https://MTnetworks.github.io/mtwl-blog.github.io/post/ru-he-zai-Truenas-shang-an-zhuang-du-li-de-Home-assistant.html</link><description>### Truenas上安装独立的HomeAssistantOS系统
+因TrueNAS商店的HomeAssistant有功能上的缺陷，所以需独立部署HAOS系统
 
-- 进入 **虚拟化 → 虚拟机**
-- 点击 **添加**
-- 配置：
-  **虚拟机基本配置**
-  -   名称: Homeassistant
-  -   描述: 独立 Home Assistant 实例
-  -   **硬盘选项：**选择创建好的系统镜像盘
-  -   系统和配置: 选择Linux和合适的内存和 CPU
-  -   **引导设备**: 选择**老毛桃PE.ISO**文件
-  -   **网卡选择**：**不要选VirtIO**
-  -   保存配置后不要急着启动
-      **添加硬盘**
-     找到虚拟机列表
-    1.点设备
-    2.添加设备
-    3.添加硬盘
-   4.添加之前创建好的 存放镜像文件的硬盘
-
-**2.下载镜像文件制作系统盘**
-
-1. 进入PE后启动网络
-2. 通过浏览器下载Homeassistant镜像文件，下载地址：https://www.home-assistant.io/installation/generic-x86-64/
-3. 下载完后解压得到IMG文件。</description><guid isPermaLink="true">https://MTnetworks.github.io/mtwl-blog.github.io/post/ru-he-zai-Truenas-shang-an-zhuang-du-li-de-Home-assistant.html</guid><pubDate>Tue, 25 Nov 2025 04:07:05 +0000</pubDate></item><item><title>True-NAS安装和权限设置</title><link>https://MTnetworks.github.io/mtwl-blog.github.io/post/True-NAS-an-zhuang-he-quan-xian-she-zhi.html</link><description>### 前期准备工作
+**重要提醒** 在创建虚拟机之前先创建**2块数据集**（Dataset）格式为**Zvol**，分别存储下载的镜像文件和系统盘。</description><guid isPermaLink="true">https://MTnetworks.github.io/mtwl-blog.github.io/post/ru-he-zai-Truenas-shang-an-zhuang-du-li-de-Home-assistant.html</guid><pubDate>Tue, 25 Nov 2025 04:07:05 +0000</pubDate></item><item><title>True-NAS安装和权限设置</title><link>https://MTnetworks.github.io/mtwl-blog.github.io/post/True-NAS-an-zhuang-he-quan-xian-she-zhi.html</link><description>### 前期准备工作
 TrueNAS Scale 下载地址：https://www.truenas.com/download-truenas-scale/
 下载文件说明：您下载的文件将是一个 .iso 格式的镜像文件，文件名类似于：TrueNAS-SCALE-24.10.0.iso 这个文件用于制作安装盘。</description><guid isPermaLink="true">https://MTnetworks.github.io/mtwl-blog.github.io/post/True-NAS-an-zhuang-he-quan-xian-she-zhi.html</guid><pubDate>Tue, 25 Nov 2025 03:30:19 +0000</pubDate></item><item><title>知识库管理系统</title><link>https://MTnetworks.github.io/mtwl-blog.github.io/post/zhi-shi-ku-guan-li-xi-tong.html</link><description># 知识库管理系统
 
