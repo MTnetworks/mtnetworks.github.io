@@ -66,6 +66,10 @@ ssh root@你的_home_assistant_ip
 输入密码后，你应该就能成功登录到 Home Assistant OS 的系统命令行了。
 
 Home Assistant商店默认仓库地址:https://github.com/esphome/home-assistant-addon
+### 安装冬瓜商店
+
+1. 设置-加载项-加载项商店-右上角三个点-仓库-添加冬瓜商店地址：https://gitcode.com/waxgourd/addons
+2. 冬瓜商店安装好后建议第一时间安装好Filebrowser文件浏览器。
 
 ### HACS如何安装
 **前提条件**
