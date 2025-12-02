@@ -1,5 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>铭泰网络的博客</title><link>https://MTnetworks.github.io/mtwl-blog.github.io</link><description>铭泰网络智能科技</description><copyright>铭泰网络的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://MTnetworks.github.io/mtwl-blog.github.io</link></image><lastBuildDate>Tue, 02 Dec 2025 03:22:01 +0000</lastBuildDate><managingEditor>铭泰网络的博客</managingEditor><ttl>60</ttl><webMaster>铭泰网络的博客</webMaster><item><title>Linux更改国内镜像源</title><link>https://MTnetworks.github.io/mtwl-blog.github.io/post/Linux-geng-gai-guo-nei-jing-xiang-yuan.html</link><description>**Linux各发行版镜像源更换指南：**
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>铭泰网络的博客</title><link>https://MTnetworks.github.io/mtwl-blog.github.io</link><description>铭泰网络智能科技</description><copyright>铭泰网络的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://MTnetworks.github.io/mtwl-blog.github.io</link></image><lastBuildDate>Tue, 02 Dec 2025 08:10:32 +0000</lastBuildDate><managingEditor>铭泰网络的博客</managingEditor><ttl>60</ttl><webMaster>铭泰网络的博客</webMaster><item><title>TrueNAS安装1panel面板运行Docker</title><link>https://MTnetworks.github.io/mtwl-blog.github.io/post/TrueNAS-an-zhuang-1panel-mian-ban-yun-xing-Docker.html</link><description>1.安装完TrueNAS后先在数据集创建一个文件夹用于存放1panel数据
+2.在系统--命令行以root用户运行  sodu -i
+3.安装开发者工具
+```
+install-dev-tools
+```
+4.开始安装1panel程序
+```
+bash -c '$(curl -sSL https://resource.fit2cloud.com/1panel/package/v2/quick_start.sh)'
+```
+
+附：[境内 Docker 镜像状态监控列表](https://status.anye.xyz/)。</description><guid isPermaLink="true">https://MTnetworks.github.io/mtwl-blog.github.io/post/TrueNAS-an-zhuang-1panel-mian-ban-yun-xing-Docker.html</guid><pubDate>Tue, 02 Dec 2025 08:10:02 +0000</pubDate></item><item><title>Linux更改国内镜像源</title><link>https://MTnetworks.github.io/mtwl-blog.github.io/post/Linux-geng-gai-guo-nei-jing-xiang-yuan.html</link><description>**Linux各发行版镜像源更换指南：**
 在Linux系统使用过程中，由于默认软件源服务器位于海外，国内用户常遇到下载速度慢、更新失败等问题。</description><guid isPermaLink="true">https://MTnetworks.github.io/mtwl-blog.github.io/post/Linux-geng-gai-guo-nei-jing-xiang-yuan.html</guid><pubDate>Tue, 02 Dec 2025 03:21:31 +0000</pubDate></item><item><title>Home Assistant服务器搭建和安装HACS商店</title><link>https://MTnetworks.github.io/mtwl-blog.github.io/post/Home%20Assistant-fu-wu-qi-da-jian-he-an-zhuang-HACS-shang-dian.html</link><description>### Home Assistant服务器搭建
 搭建 Home Assistant 服务器是一个非常有趣且实用的项目，它能让你彻底掌控自己的智能家居，实现高度自动化和隐私保护。</description><guid isPermaLink="true">https://MTnetworks.github.io/mtwl-blog.github.io/post/Home%20Assistant-fu-wu-qi-da-jian-he-an-zhuang-HACS-shang-dian.html</guid><pubDate>Tue, 25 Nov 2025 07:43:04 +0000</pubDate></item><item><title>如何在Truenas上安装独立的Home-assistant</title><link>https://MTnetworks.github.io/mtwl-blog.github.io/post/ru-he-zai-Truenas-shang-an-zhuang-du-li-de-Home-assistant.html</link><description>### Truenas上安装独立的HomeAssistantOS系统
 因TrueNAS商店的HomeAssistant有功能上的缺陷，所以需独立部署HAOS系统
