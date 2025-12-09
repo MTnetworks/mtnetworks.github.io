@@ -1,5 +1,120 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>铭泰网络的博客</title><link>https://mtnetworks.github.io</link><description>铭泰网络智能科技</description><copyright>铭泰网络的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://mtnetworks.github.io</link></image><lastBuildDate>Fri, 05 Dec 2025 16:31:49 +0000</lastBuildDate><managingEditor>铭泰网络的博客</managingEditor><ttl>60</ttl><webMaster>铭泰网络的博客</webMaster><item><title>使用 Dockerfile 定制Docker镜像</title><link>https://mtnetworks.github.io/post/shi-yong-%20Dockerfile%20-ding-zhi-Docker-jing-xiang.html</link><description># Dockerfile构建镜像基础知识
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>铭泰网络的博客</title><link>https://mtnetworks.github.io</link><description>铭泰网络智能科技</description><copyright>铭泰网络的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://mtnetworks.github.io</link></image><lastBuildDate>Tue, 09 Dec 2025 03:59:10 +0000</lastBuildDate><managingEditor>铭泰网络的博客</managingEditor><ttl>60</ttl><webMaster>铭泰网络的博客</webMaster><item><title>代理配置</title><link>https://mtnetworks.github.io/post/dai-li-pei-zhi.html</link><description>**1. 首先检查浏览器代理配置**
+在浏览器中查看当前使用的代理：
+Chrome/Edge: chrome://settings/help → 关于 → 代理设置
+或直接查看系统代理设置
+**2. 为命令行设置代理**
+Windows (CMD/PowerShell):
+```
+cmd
+# 临时设置（当前会话有效）
+set http_proxy=http://127.0.0.1:1080
+set https_proxy=http://127.0.0.1:1080
+
+# 或在 PowerShell 中
+$env:HTTP_PROXY='http://127.0.0.1:1080'
+$env:HTTPS_PROXY='http://127.0.0.1:1080'
+```
+Windows 设置永久代理：
+```
+cmd
+# 添加到系统环境变量
+setx HTTP_PROXY 'http://127.0.0.1:1080'
+setx HTTPS_PROXY 'http://127.0.0.1:1080'
+```
+Linux/Mac:
+```
+# 临时设置
+export http_proxy=http://127.0.0.1:1080
+export https_proxy=http://127.0.0.1:1080
+
+# 永久设置（添加到 ~/.bashrc 或 ~/.zshrc）
+echo 'export http_proxy=http://127.0.0.1:1080' &gt;&gt; ~/.bashrc
+echo 'export https_proxy=http://127.0.0.1:1080' &gt;&gt; ~/.bashrc
+source ~/.bashrc
+```
+**3. 如果使用 SOCKS5 代理（如 Clash/V2Ray）**
+```
+# 使用 curl 的 --socks5 参数
+curl --socks5 127.0.0.1:1080 https://github.com
+
+# 或设置 all_proxy（适用于 SOCKS）
+export all_proxy=socks5://127.0.0.1:1080
+```
+**4. 专门为 Git 配置代理**
+```
+# HTTP/HTTPS 代理
+git config --global http.proxy http://127.0.0.1:1080
+git config --global https.proxy http://127.0.0.1:1080
+
+# SOCKS5 代理
+git config --global http.proxy socks5://127.0.0.1:1080
+git config --global https.proxy socks5://127.0.0.1:1080
+
+# 取消代理
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
+**5. 验证代理是否生效**
+```
+# 测试连接
+curl -v https://github.com
+
+# 查看代理是否使用
+curl -v --proxy http://127.0.0.1:1080 https://github.com
+
+# 查看 IP（确认代理生效）
+curl https://api.ipify.org?format=json
+```
+**6. 常见问题排查**
+A. 代理地址/端口不正确
+检查代理软件的实际端口
+
+常见端口：1080, 10808, 7890, 8888
+B. 代理需要认证
+```
+# 如果有用户名密码
+export http_proxy=http://username:password@127.0.0.1:1080
+```
+C. 某些工具需要特殊配置
+```
+# apt (Ubuntu/Debian)
+echo 'Acquire::http::Proxy 'http://127.0.0.1:1080';' | sudo tee /etc/apt/apt.conf.d/proxy.conf
+
+# npm
+npm config set proxy http://127.0.0.1:1080
+npm config set https-proxy http://127.0.0.1:1080
+
+# yarn
+yarn config set proxy http://127.0.0.1:1080
+yarn config set https-proxy http://127.0.0.1:1080
+```
+**7. Windows 特殊处理**
+如果上述方法无效，尝试：
+```
+powershell
+# 1. 以管理员身份运行命令行
+# 2. 重置网络
+netsh winhttp reset proxy
+
+# 3. 或直接设置 WinHTTP 代理（影响系统级别）
+netsh winhttp set proxy 127.0.0.1:1080
+```
+**8. 快捷检测脚本**
+创建测试脚本 test_proxy.sh：
+```
+#!/bin/bash
+echo 'Testing proxy connection...'
+echo '1. Without proxy:'
+curl -s --connect-timeout 5 https://github.com | grep -o '&lt;title&gt;.*&lt;/title&gt;'
+
+echo -e '\n2. With proxy:'
+curl -s --proxy http://127.0.0.1:1080 --connect-timeout 5 https://github.com | grep -o '&lt;title&gt;.*&lt;/title&gt;'
+
+echo -e '\n3. Current public IP:'
+curl --proxy http://127.0.0.1:1080 -s https://api.ipify.org
+```
+。</description><guid isPermaLink="true">https://mtnetworks.github.io/post/dai-li-pei-zhi.html</guid><pubDate>Tue, 09 Dec 2025 03:58:45 +0000</pubDate></item><item><title>使用 Dockerfile 定制Docker镜像</title><link>https://mtnetworks.github.io/post/shi-yong-%20Dockerfile%20-ding-zhi-Docker-jing-xiang.html</link><description># Dockerfile构建镜像基础知识
 理解 Dockerfile 是构建 Docker 镜像的核心。</description><guid isPermaLink="true">https://mtnetworks.github.io/post/shi-yong-%20Dockerfile%20-ding-zhi-Docker-jing-xiang.html</guid><pubDate>Wed, 03 Dec 2025 16:07:27 +0000</pubDate></item><item><title>Ubuntua安装Docker</title><link>https://mtnetworks.github.io/post/Ubuntua-an-zhuang-Docker.html</link><description># Ubuntu 安装 Docker
 
 &gt;**警告**：切勿在没有配置 Docker APT 源的情况下直接使用 apt 命令安装 Docker.
