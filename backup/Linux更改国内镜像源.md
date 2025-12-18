@@ -1,5 +1,5 @@
 **Linux各发行版镜像源更换指南：**
-在Linux系统使用过程中，由于默认软件源服务器位于海外，国内用户常遇到下载速度慢、更新失败等问题。通过更换国内镜像源可显著提升软件包下载和系统更新效率。本文将详细介绍CentOS/RHEL、Ubuntu/Debian、Arch Linux等主流发行版的镜像源更换方法。
+在Linux系统使用过程中，由于默认软件源服务器位于海外，国内用户常遇到下载速度慢、更新失败等问题。通过更换国内镜像源可显著提升软件包下载和系统更新效率。本文将详细介绍CentOS/RHEL、Ubuntu/Debian、Arch Linux等主流发行版的镜像源更换方法。[清华大学源](https://mirrors.tuna.tsinghua.edu.cn/)
 ### Ubuntu/Debian系统镜像源更换
 **Ubuntu更换阿里云源**
 备份源列表：
