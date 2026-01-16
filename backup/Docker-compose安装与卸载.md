@@ -20,7 +20,7 @@ sudo docker compose logs pgvecto_upgrade
 sudo docker compose pull
 sudo docker compose up -d
 
-## 删除 Docker Compose 版应用
+**# 删除 Docker Compose 版应用**
 # 1. 进入部署目录（请确认你的路径）
 cd /mnt/DATA/Apps/Immich
 # 2. 【关键】停止并删除所有容器、网络，同时删除所有关联的命名卷（-v 参数）
