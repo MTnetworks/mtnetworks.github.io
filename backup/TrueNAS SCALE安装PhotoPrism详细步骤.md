@@ -1,4 +1,3 @@
-### **详细安装步骤**
 ### 第一步：规划与创建存储数据集
 在TrueNAS存储池中创建专门的数据集，用于存放数据库和照片数据，便于管理和备份。
 进入 **存储** > **数据集**。
@@ -10,7 +9,7 @@
 **Site URL（站点URL）**：暂时可以留空，或填写你打算访问的地址（如 http://你的TrueNAS-IP:2342）。
 **管理员密码***：设置一个强密码，用于登录PhotoPrism的Web管理界面（用户名默认是admin）。务必牢记。
 用户ID / 群组ID：保持默认的 568 即可，这是PhotoPrism应用在容器内运行的身份标识。
-### 第四步：添加数据库变量
+### 第四步：添加数据库变量（### **重点**### ）
 点击：**Additional Environment Variables** 添加
 **名称**：PHOTOPRISM_DATABASE_DRIVER
 **值**：sqlite
@@ -22,15 +21,18 @@ WebUI端口：
 其他选项（Host Network, Certificate ID, DNS Options）保持默认或留空。
 ### 第六步：存储配置
 系统为你自动创建了三个ixVolume，这是合理的，但你需要明确它们的用途：
-**Photoprism Import Storage**：临时存放从Web界面“导入”的照片，导入完成后文件会被移动到Originals。可使用自动创建的数据集。
+
+- **Photoprism Import Storage**：临时存放从Web界面“导入”的照片，导入完成后文件会被移动到Originals。可使用自动创建的数据集。
 **类型**：Host Path
-Host Path：/mnt/DATA/photoprism/import
-**Photoprism Storage**：存放PhotoPrism的配置文件、缓存和索引数据库（SQLite文件，但我们将用MariaDB替代）。建议你在这里选择“添加”，手动挂载一个你预先创建好的、专门用于storage的数据集，便于管理和备份。
+**Host Path**：/mnt/DATA/photoprism/import
+
+- **Photoprism Storage**：存放PhotoPrism的配置文件、缓存和索引数据库（SQLite文件，但我们将用MariaDB替代）。建议你在这里选择“添加”，手动挂载一个你预先创建好的、专门用于storage的数据集，便于管理和备份。
 **类型**：Host Path
-Host Path：/mnt/DATA/photoprism/storage
-**Photoprism Originals Storage**：存放所有原始照片和视频文件的核心位置。强烈建议手动挂载到你预先创建的originals数据集。
+**Host Path**：/mnt/DATA/photoprism/storage
+
+- **Photoprism Originals Storage**：存放所有原始照片和视频文件的核心位置。强烈建议手动挂载到你预先创建的originals数据集。
 **类型**：Host Path
-Host Path：/mnt/DATA/photoprism/originals
+**Host Path**：/mnt/DATA/photoprism/originals
 操作建议：对于后两项，点击“添加”，选择类型为“存储卷”，然后从列表中选择你之前为PhotoPrism创建的数据集（例如 photoprism/storage 和 photoprism/originals），并填写正确的容器内挂载路径（/photoprism/storage 和 /photoprism/originals）。
 ### 第七步：安装
 配置好cpu和内存后点安装即可
@@ -42,13 +44,13 @@ Host Path：/mnt/DATA/photoprism/originals
 <img width="2055" height="3516" alt="Image" src="https://github.com/user-attachments/assets/4e40f324-4b3a-4a8e-904d-fe0f9b09d868" />
 
 具体操作命令/步骤：
-1.创建专用用户：
+1. 创建专用用户：
 进入 “**凭据**” > “**本地用户**” > “**添加**”。
 用户名：例如 photo_admin。
 密码：设置一个强密码。
 **主要组**：**选择 apps**（这一步至关重要，它让该用户创建的文件天然对容器可读）。
 其他保持默认，点击 “提交”。
-**配置数据集SMB共享权限（使用ACL管理器）**：
+2. **配置数据集SMB共享权限（使用ACL管理器）**：
 **为 apps 组添加 读取、执行 和 遍历目录 权限**。
 编辑或创建SMB共享时，在 “**ACL编辑**” 中找到 “访问控制列表” 设置，**添加 apps 组**。这能确保通过SMB创建的文件继承正确的组所有权。
 完成后，你将拥有一个完美的流程：

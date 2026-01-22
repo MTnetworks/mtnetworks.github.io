@@ -10,12 +10,10 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="### **详细安装步骤**
-### 第一步：规划与创建存储数据集
+<meta name="description" content="### 第一步：规划与创建存储数据集
 在TrueNAS存储池中创建专门的数据集，用于存放数据库和照片数据，便于管理和备份。">
 <meta property="og:title" content="TrueNAS SCALE安装PhotoPrism详细步骤">
-<meta property="og:description" content="### **详细安装步骤**
-### 第一步：规划与创建存储数据集
+<meta property="og:description" content="### 第一步：规划与创建存储数据集
 在TrueNAS存储池中创建专门的数据集，用于存放数据库和照片数据，便于管理和备份。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://mtnetworks.github.io/post/TrueNAS%20SCALE-an-zhuang-PhotoPrism-xiang-xi-bu-zou.html">
@@ -77,8 +75,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><h3><strong>详细安装步骤</strong></h3>
-<h3>第一步：规划与创建存储数据集</h3>
+<div class="markdown-body" id="postBody"><h3>第一步：规划与创建存储数据集</h3>
 <p>在TrueNAS存储池中创建专门的数据集，用于存放数据库和照片数据，便于管理和备份。<br>
 进入 <strong>存储</strong> &gt; <strong>数据集</strong>。<br>
 点击 <strong>添加</strong>，创建数据集（名称可自定义）：photoprism：建议在此数据集下再创建三个子数据集。<br>
@@ -89,7 +86,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p><strong>Site URL（站点URL）</strong>：暂时可以留空，或填写你打算访问的地址（如 <a href="http://%E4%BD%A0%E7%9A%84TrueNAS-IP:2342%EF%BC%89%E3%80%82" rel="nofollow">http://你的TrueNAS-IP:2342）。</a><br>
 <strong>管理员密码</strong>*：设置一个强密码，用于登录PhotoPrism的Web管理界面（用户名默认是admin）。务必牢记。<br>
 用户ID / 群组ID：保持默认的 568 即可，这是PhotoPrism应用在容器内运行的身份标识。</p>
-<h3>第四步：添加数据库变量</h3>
+<h3>第四步：添加数据库变量（### <strong>重点</strong>### ）</h3>
 <p>点击：<strong>Additional Environment Variables</strong> 添加<br>
 <strong>名称</strong>：PHOTOPRISM_DATABASE_DRIVER<br>
 <strong>值</strong>：sqlite</p>
@@ -100,38 +97,48 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <strong>Host IPs</strong>：留空表示绑定到主机的所有IP地址。<br>
 其他选项（Host Network, Certificate ID, DNS Options）保持默认或留空。</p>
 <h3>第六步：存储配置</h3>
-<p>系统为你自动创建了三个ixVolume，这是合理的，但你需要明确它们的用途：<br>
-<strong>Photoprism Import Storage</strong>：临时存放从Web界面“导入”的照片，导入完成后文件会被移动到Originals。可使用自动创建的数据集。<br>
+<p>系统为你自动创建了三个ixVolume，这是合理的，但你需要明确它们的用途：</p>
+<ul>
+<li>
+<p><strong>Photoprism Import Storage</strong>：临时存放从Web界面“导入”的照片，导入完成后文件会被移动到Originals。可使用自动创建的数据集。<br>
 <strong>类型</strong>：Host Path<br>
-Host Path：/mnt/DATA/photoprism/import<br>
-<strong>Photoprism Storage</strong>：存放PhotoPrism的配置文件、缓存和索引数据库（SQLite文件，但我们将用MariaDB替代）。建议你在这里选择“添加”，手动挂载一个你预先创建好的、专门用于storage的数据集，便于管理和备份。<br>
+<strong>Host Path</strong>：/mnt/DATA/photoprism/import</p>
+</li>
+<li>
+<p><strong>Photoprism Storage</strong>：存放PhotoPrism的配置文件、缓存和索引数据库（SQLite文件，但我们将用MariaDB替代）。建议你在这里选择“添加”，手动挂载一个你预先创建好的、专门用于storage的数据集，便于管理和备份。<br>
 <strong>类型</strong>：Host Path<br>
-Host Path：/mnt/DATA/photoprism/storage<br>
-<strong>Photoprism Originals Storage</strong>：存放所有原始照片和视频文件的核心位置。强烈建议手动挂载到你预先创建的originals数据集。<br>
+<strong>Host Path</strong>：/mnt/DATA/photoprism/storage</p>
+</li>
+<li>
+<p><strong>Photoprism Originals Storage</strong>：存放所有原始照片和视频文件的核心位置。强烈建议手动挂载到你预先创建的originals数据集。<br>
 <strong>类型</strong>：Host Path<br>
-Host Path：/mnt/DATA/photoprism/originals<br>
+<strong>Host Path</strong>：/mnt/DATA/photoprism/originals<br>
 操作建议：对于后两项，点击“添加”，选择类型为“存储卷”，然后从列表中选择你之前为PhotoPrism创建的数据集（例如 photoprism/storage 和 photoprism/originals），并填写正确的容器内挂载路径（/photoprism/storage 和 /photoprism/originals）。</p>
+</li>
+</ul>
 <h3>第七步：安装</h3>
 <p>配置好cpu和内存后点安装即可</p>
 <h3>第八步：配置在 TrueNAS 中创建专用的 SMB 共享数据集（推荐）</h3>
 <p>为了解决核心需求（从Windows方便上传，且PhotoPrism能读取），我推荐一个更清晰、安全的一劳永逸的方案：创建一个专用的、高权限的“照片管理”用户。<br>
 以下是详细操作流程图，它能帮你理清用户、权限和应用间的完整关系：</p>
 <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/4e40f324-4b3a-4a8e-904d-fe0f9b09d868"><img width="2000" height="2000" alt="Image" src="https://github.com/user-attachments/assets/4e40f324-4b3a-4a8e-904d-fe0f9b09d868" style="max-width: 100%; height: auto; max-height: 2000px;"></a></p>
-<p>具体操作命令/步骤：<br>
-1.创建专用用户：<br>
+<p>具体操作命令/步骤：</p>
+<ol>
+<li>创建专用用户：<br>
 进入 “<strong>凭据</strong>” &gt; “<strong>本地用户</strong>” &gt; “<strong>添加</strong>”。<br>
 用户名：例如 photo_admin。<br>
 密码：设置一个强密码。<br>
 <strong>主要组</strong>：<strong>选择 apps</strong>（这一步至关重要，它让该用户创建的文件天然对容器可读）。<br>
-其他保持默认，点击 “提交”。<br>
-<strong>配置数据集SMB共享权限（使用ACL管理器）</strong>：<br>
+其他保持默认，点击 “提交”。</li>
+<li><strong>配置数据集SMB共享权限（使用ACL管理器）</strong>：<br>
 <strong>为 apps 组添加 读取、执行 和 遍历目录 权限</strong>。<br>
 编辑或创建SMB共享时，在 “<strong>ACL编辑</strong>” 中找到 “访问控制列表” 设置，<strong>添加 apps 组</strong>。这能确保通过SMB创建的文件继承正确的组所有权。<br>
 完成后，你将拥有一个完美的流程：<br>
 在Windows上：你用 photo_admin 账户登录SMB，拥有完全的上传和管理权限。<br>
 在PhotoPrism中：容器（属apps组）能无缝读取你上传的所有照片并为其建立索引。<br>
 所有新创建的文件，其组所有者都会是 apps，从根本上杜绝了权限问题。<br>
-这个方案结构清晰，安全可控，是兼顾便利性与系统安全的推荐做法。</p></div>
+这个方案结构清晰，安全可控，是兼顾便利性与系统安全的推荐做法。</li>
+</ol></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
