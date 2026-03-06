@@ -1,9 +1,12 @@
 ### Truenas上安装独立的HomeAssistantOS系统
 因TrueNAS商店的HomeAssistant有功能上的缺陷，所以需独立部署HAOS系统
 
-**重要提醒** 在创建虚拟机之前先创建**2块数据集**（Dataset）格式为**Zvol**，分别存储下载的镜像文件和系统盘。并提前下载好[Ubuntu Desktop](https://ubuntu.com/download/desktop)镜像文件。
+**安装思路** 由于HAOS官方文件是xxx.img.xz后缀结尾的，不能直接在虚拟机上进行引导安装。我们需要借助悟空大神的一个系统制作工具将img.xz格式的文件转为iso进行引导安装，具体操作如下。
 
-**1. 创建虚拟机**
+在创建虚拟机之前先创建**块数据集**（Dataset）格式为**Zvol**，用于安装系统使用。
+首先我们来的悟空的镜像安装器项目地址：https://github.com/wukongdaily/img-installer  可以fork到自己的仓库下面，然后来到刚fork项目的**Actions**,找到**Build HAOS Inastaller ISO**这个工作流，点击**Run workflow**，输入HAOS官网固件下载地址(扩展名 .img.gz/.img.xz/.img.zip)，然后点运行，稍等几分钟后由.img.xz的固件就转换成了iso文件了。然后下载到本地上传只NAS文件夹里。
+
+**创建虚拟机**
 
 - 进入 **虚拟化 → 虚拟机**
 - 点击 **添加**
@@ -13,29 +16,13 @@
   -   描述: 独立 Home Assistant 实例
   -   **硬盘选项：**选择创建好的系统镜像盘
   -   系统和配置: 选择Linux和合适的内存和 CPU
-  -   **引导设备**: 选择**[Ubuntu Desktop instructions](https://ubuntu.com/download/desktop).ISO**文件
+  -   **引导设备**: 选择刚刚上传的HAOS.ISO**文件
   -   **网卡选择**：**不要选VirtIO**
-  -   保存配置后不要急着启动
-      **添加硬盘**
-     找到虚拟机列表
-    1.点设备
-    2.添加设备
-    3.添加硬盘
-   4.添加之前创建好的 存放镜像文件的硬盘
+  -   保存配置启动
+-  启动后:在安装器所在系统里输入 ddd 命令 方可调出安装菜单。
+<img width="1370" height="548" alt="Image" src="https://github.com/user-attachments/assets/348619bf-04d4-4c33-9fd2-c91d2481a4df" />
 
-**2.通过[Ubuntu Desktop试用版](https://ubuntu.com/download/desktop)进行安装Homeassistant系统**
+- 接下来就是选择镜像名称和安装硬盘位置，输入大写的YES进行安装，安装完后删除CR-ROM在启动系统。
+<img width="485" height="351" alt="Image" src="https://github.com/user-attachments/assets/0c0ff32f-850f-4a76-b202-26b7f80e6192" />
 
-1. 提前将Ubuntu Desktop镜像文件ISO放入共享文件里
-2. 修改设备类型：将CD-ROM文件修改为Ubuntu Desktop镜像文件ISO
-3. 系统随后启动Ubuntu。
-4. 把你的系统连接到网络，确保它有互联网接入。
-5. 在Ubuntu中，打开浏览器并打开当前文档页面，这样你可以按照步骤作。
-6. 从那里开始，[下载HAOS镜像](https://github.com/home-assistant/operating-system/releases/download/16.3/haos_generic-x86-64-16.3.img.xz).
-7. 在Ubuntu中，左下角选择“显示应用程序”。
-8. 在应用程序中搜索并打开磁盘，开始恢复HAOS映像：
-9. 在磁盘中，左侧选择你想安装HAOS的内部磁盘设备。
-10. 在屏幕顶部，选择三点菜单，选择“恢复磁盘映像......”。恢复磁盘映像：选择三点菜单
-11. 选择你刚下载的图片。恢复磁盘映像：选择映像
-12. 选择开始恢复......。恢复磁盘镜像：开始恢复
-13. 请选择恢复确认。恢复磁盘镜像：选择恢复
-14. 重启得到home-assistant管理地址
+- 重启得到home-assistant管理地址

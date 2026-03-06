@@ -13,12 +13,12 @@
 <meta name="description" content="### Truenas上安装独立的HomeAssistantOS系统
 因TrueNAS商店的HomeAssistant有功能上的缺陷，所以需独立部署HAOS系统
 
-**重要提醒** 在创建虚拟机之前先创建**2块数据集**（Dataset）格式为**Zvol**，分别存储下载的镜像文件和系统盘。">
+**安装思路** 由于HAOS官方文件是xxx.img.xz后缀结尾的，不能直接在虚拟机上进行引导安装。">
 <meta property="og:title" content="如何在Truenas上安装独立的Home-assistant">
 <meta property="og:description" content="### Truenas上安装独立的HomeAssistantOS系统
 因TrueNAS商店的HomeAssistant有功能上的缺陷，所以需独立部署HAOS系统
 
-**重要提醒** 在创建虚拟机之前先创建**2块数据集**（Dataset）格式为**Zvol**，分别存储下载的镜像文件和系统盘。">
+**安装思路** 由于HAOS官方文件是xxx.img.xz后缀结尾的，不能直接在虚拟机上进行引导安装。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://mtnetworks.github.io/post/ru-he-zai-Truenas-shang-an-zhuang-du-li-de-Home-assistant.html">
 <meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
@@ -81,8 +81,10 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     <div id="content">
 <div class="markdown-body" id="postBody"><h3>Truenas上安装独立的HomeAssistantOS系统</h3>
 <p>因TrueNAS商店的HomeAssistant有功能上的缺陷，所以需独立部署HAOS系统</p>
-<p><strong>重要提醒</strong> 在创建虚拟机之前先创建<strong>2块数据集</strong>（Dataset）格式为<strong>Zvol</strong>，分别存储下载的镜像文件和系统盘。并提前下载好<a href="https://ubuntu.com/download/desktop" rel="nofollow">Ubuntu Desktop</a>镜像文件。</p>
-<p><strong>1. 创建虚拟机</strong></p>
+<p><strong>安装思路</strong> 由于HAOS官方文件是xxx.img.xz后缀结尾的，不能直接在虚拟机上进行引导安装。我们需要借助悟空大神的一个系统制作工具将img.xz格式的文件转为iso进行引导安装，具体操作如下。</p>
+<p>在创建虚拟机之前先创建<strong>块数据集</strong>（Dataset）格式为<strong>Zvol</strong>，用于安装系统使用。<br>
+首先我们来的悟空的镜像安装器项目地址：<a href="https://github.com/wukongdaily/img-installer">https://github.com/wukongdaily/img-installer</a>  可以fork到自己的仓库下面，然后来到刚fork项目的<strong>Actions</strong>,找到<strong>Build HAOS Inastaller ISO</strong>这个工作流，点击<strong>Run workflow</strong>，输入HAOS官网固件下载地址(扩展名 .img.gz/.img.xz/.img.zip)，然后点运行，稍等几分钟后由.img.xz的固件就转换成了iso文件了。然后下载到本地上传只NAS文件夹里。</p>
+<p><strong>创建虚拟机</strong></p>
 <ul>
 <li>进入 <strong>虚拟化 → 虚拟机</strong></li>
 <li>点击 <strong>添加</strong></li>
@@ -93,35 +95,21 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li>描述: 独立 Home Assistant 实例</li>
 <li>**硬盘选项：**选择创建好的系统镜像盘</li>
 <li>系统和配置: 选择Linux和合适的内存和 CPU</li>
-<li><strong>引导设备</strong>: 选择**<a href="https://ubuntu.com/download/desktop" rel="nofollow">Ubuntu Desktop instructions</a>.ISO**文件</li>
+<li><strong>引导设备</strong>: 选择刚刚上传的HAOS.ISO**文件</li>
 <li><strong>网卡选择</strong>：<strong>不要选VirtIO</strong></li>
-<li>保存配置后不要急着启动<br>
-<strong>添加硬盘</strong><br>
-找到虚拟机列表<br>
-1.点设备<br>
-2.添加设备<br>
-3.添加硬盘<br>
-4.添加之前创建好的 存放镜像文件的硬盘</li>
+<li>保存配置启动</li>
 </ul>
 </li>
+<li>启动后:在安装器所在系统里输入 ddd 命令 方可调出安装菜单。</li>
 </ul>
-<p><strong>2.通过<a href="https://ubuntu.com/download/desktop" rel="nofollow">Ubuntu Desktop试用版</a>进行安装Homeassistant系统</strong></p>
-<ol>
-<li>提前将Ubuntu Desktop镜像文件ISO放入共享文件里</li>
-<li>修改设备类型：将CD-ROM文件修改为Ubuntu Desktop镜像文件ISO</li>
-<li>系统随后启动Ubuntu。</li>
-<li>把你的系统连接到网络，确保它有互联网接入。</li>
-<li>在Ubuntu中，打开浏览器并打开当前文档页面，这样你可以按照步骤作。</li>
-<li>从那里开始，<a href="https://github.com/home-assistant/operating-system/releases/download/16.3/haos_generic-x86-64-16.3.img.xz">下载HAOS镜像</a>.</li>
-<li>在Ubuntu中，左下角选择“显示应用程序”。</li>
-<li>在应用程序中搜索并打开磁盘，开始恢复HAOS映像：</li>
-<li>在磁盘中，左侧选择你想安装HAOS的内部磁盘设备。</li>
-<li>在屏幕顶部，选择三点菜单，选择“恢复磁盘映像......”。恢复磁盘映像：选择三点菜单</li>
-<li>选择你刚下载的图片。恢复磁盘映像：选择映像</li>
-<li>选择开始恢复......。恢复磁盘镜像：开始恢复</li>
-<li>请选择恢复确认。恢复磁盘镜像：选择恢复</li>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/348619bf-04d4-4c33-9fd2-c91d2481a4df"><img width="1370" height="548" alt="Image" src="https://github.com/user-attachments/assets/348619bf-04d4-4c33-9fd2-c91d2481a4df" style="max-width: 100%; height: auto; max-height: 548px;"></a></p>
+<ul>
+<li>接下来就是选择镜像名称和安装硬盘位置，输入大写的YES进行安装，安装完后删除CR-ROM在启动系统。</li>
+</ul>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/0c0ff32f-850f-4a76-b202-26b7f80e6192"><img width="485" height="351" alt="Image" src="https://github.com/user-attachments/assets/0c0ff32f-850f-4a76-b202-26b7f80e6192" style="max-width: 100%; height: auto; max-height: 351px;"></a></p>
+<ul>
 <li>重启得到home-assistant管理地址</li>
-</ol></div>
+</ul></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
