@@ -1,5 +1,29 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>铭泰网络的博客</title><link>https://mtnetworks.github.io</link><description>铭泰网络智能科技</description><copyright>铭泰网络的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://mtnetworks.github.io</link></image><lastBuildDate>Mon, 09 Mar 2026 09:36:19 +0000</lastBuildDate><managingEditor>铭泰网络的博客</managingEditor><ttl>60</ttl><webMaster>铭泰网络的博客</webMaster><item><title>OpenClaw 安装和使用指南</title><link>https://mtnetworks.github.io/post/OpenClaw%20-an-zhuang-he-shi-yong-zhi-nan.html</link><description>### **安装前准备**
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>铭泰网络的博客</title><link>https://mtnetworks.github.io</link><description>铭泰网络智能科技</description><copyright>铭泰网络的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://mtnetworks.github.io</link></image><lastBuildDate>Mon, 09 Mar 2026 15:10:03 +0000</lastBuildDate><managingEditor>铭泰网络的博客</managingEditor><ttl>60</ttl><webMaster>铭泰网络的博客</webMaster><item><title>在 Windows 上安装 OpenClaw 客户端</title><link>https://mtnetworks.github.io/post/zai-%20Windows%20-shang-an-zhuang-%20OpenClaw%20-ke-hu-duan.html</link><description>快速安装（PowerShell）
+以管理员身份打开 PowerShell，运行：
+```
+iwr -useb https://openclaw.ai/install.ps1 | iex
+```
+这会：
+
+检查并安装 Node.js 22+
+安装 OpenClaw
+启动配置向导
+安装后配置
+安装完成后，运行：
+```
+openclaw dashboard
+```
+这会打开浏览器界面，你可以：
+
+配置频道（Webhook、WhatsApp、Telegram 等）
+配对节点（让服务器和你现在的电脑连接）
+在你的 Windows PowerShell 中运行：
+```
+$env:OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
+$env:OPENCLAW_GATEWAY_TOKEN='XXXXc1cb464f68b113f96eec3ade1f585454d'
+openclaw node run --host 192.168.9.64 --port 18789 --display-name '我的Windows'
+```。</description><guid isPermaLink="true">https://mtnetworks.github.io/post/zai-%20Windows%20-shang-an-zhuang-%20OpenClaw%20-ke-hu-duan.html</guid><pubDate>Mon, 09 Mar 2026 15:09:21 +0000</pubDate></item><item><title>OpenClaw 安装和使用指南</title><link>https://mtnetworks.github.io/post/OpenClaw%20-an-zhuang-he-shi-yong-zhi-nan.html</link><description>### **安装前准备**
 系统要求
 • Node.js: 需要 Node 22 或更新版本
 • 操作系统:
