@@ -456,9 +456,10 @@ openclaw gateway status
 # 查看 launchd 日志
 tail -f ~/.openclaw/logs/gateway.log
 tail -f ~/.openclaw/logs/gateway.err.log
-```
+
 # 重新安装服务
 openclaw gateway install --force
+```
 4. PATH 环境变量问题
 问题：服务找不到某些工具
 

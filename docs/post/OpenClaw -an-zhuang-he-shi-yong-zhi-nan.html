@@ -536,11 +536,14 @@ openclaw gateway status
 # 查看 launchd 日志
 tail -f ~/.openclaw/logs/gateway.log
 tail -f ~/.openclaw/logs/gateway.err.log
+
+# 重新安装服务
+openclaw gateway install --force
 </code></pre>
-<h1>重新安装服务</h1>
-<p>openclaw gateway install --force<br>
-4. PATH 环境变量问题<br>
-问题：服务找不到某些工具</p>
+<ol start="4">
+<li>PATH 环境变量问题<br>
+问题：服务找不到某些工具</li>
+</ol>
 <p>解决：</p>
 <p>• macOS 服务最小 PATH：/opt/homebrew/bin, /usr/local/bin, /usr/bin, /bin<br>
 • 将依赖工具路径放入 ~/.openclaw/.env<br>
