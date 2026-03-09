@@ -10,57 +10,157 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="快速安装（PowerShell）
+<meta name="description" content="## Windows 作为 OpenCLAW 客户端 - 完整步骤
+
+### ✅ 成功步骤
+ 安装 Node.js 22 LTS
+下载：https://nodejs.org/dist/v22.14.0/node-v22.14.0-x64.msi
+安装时勾选 'Add to PATH'
+
+**1. 安装 OpenCLAW**
 以管理员身份打开 PowerShell，运行：
 ```
 iwr -useb https://openclaw.ai/install.ps1 | iex
 ```
-这会：
 
-检查并安装 Node.js 22+
-安装 OpenClaw
+**2. 启动节点连接
 启动配置向导
 安装后配置
-安装完成后，运行：
+安装完成后，运行
 ```
 openclaw dashboard
 ```
-这会打开浏览器界面，你可以：
-
-配置频道（Webhook、WhatsApp、Telegram 等）
-配对节点（让服务器和你现在的电脑连接）
 在你的 Windows PowerShell 中运行：
 ```
 $env:OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
 $env:OPENCLAW_GATEWAY_TOKEN='XXXXc1cb464f68b113f96eec3ade1f585454d'
 openclaw node run --host 192.168.9.64 --port 18789 --display-name '我的Windows'
-```。">
+```
+#服务器**
+```
+ 允许不安全私有连接（内网）
+$env:OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
+
+# 设置 Token
+$env:OPENCLAW_GATEWAY_TOKEN='服务器上的token'
+
+# 连接（服务器的局域网IP，不是 127.0.0.1）
+openclaw node run --host 192.168.9.64 --port 18789 --display-name '我的Windows'
+```
+**3. 服务器批准配对**
+```
+openclaw devices list
+openclaw devices approve <request_id>
+```
+
+**4. 服务器配置**
+- `gateway.bind` 设为 `lan`（不是 0.0.0.0）
+- `tools.exec.host` 设为 `node`
+
+---
+
+### ❌ 避免的错误
+
+| 错误 | 解决方法 |
+|------|----------|
+| Node.js 安装失败 | 用 LTS 版本（v22.x），不是最新版 |
+| 连接被拒绝 | 加 `OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1` |
+| Token 缺失 | 设置 `OPENCLAW_GATEWAY_TOKEN` 环境变量 |
+| 命令超时 | Gateway 绑定模式改为 `lan`，并重启服务 |
+| exec 被拒绝 | 在 Windows 创建 `~/.openclaw/exec-approvals.json` 允许命令 |
+
+---
+
+### 关于 IP 地址
+
+**服务器端**：绑定 `0.0.0.0` 或 `lan`（局域网IP），允许外部连接
+
+**客户端连接服务器**：用服务器的**局域网IP**（如 `192.168.9.64`），不是 `127.0.0.1`
+
+**客户端本地**：用 `127.0.0.1` 是指本地回环，只有本机服务才能用
+
+所以你的理解是对的：
+- 客户端连接服务器 → 用服务器IP（如 192.168.9.64）
+- 客户端本地访问 → 用 127.0.0.1
+
+---
+。">
 <meta property="og:title" content="在 Windows 上安装 OpenClaw 客户端">
-<meta property="og:description" content="快速安装（PowerShell）
+<meta property="og:description" content="## Windows 作为 OpenCLAW 客户端 - 完整步骤
+
+### ✅ 成功步骤
+ 安装 Node.js 22 LTS
+下载：https://nodejs.org/dist/v22.14.0/node-v22.14.0-x64.msi
+安装时勾选 'Add to PATH'
+
+**1. 安装 OpenCLAW**
 以管理员身份打开 PowerShell，运行：
 ```
 iwr -useb https://openclaw.ai/install.ps1 | iex
 ```
-这会：
 
-检查并安装 Node.js 22+
-安装 OpenClaw
+**2. 启动节点连接
 启动配置向导
 安装后配置
-安装完成后，运行：
+安装完成后，运行
 ```
 openclaw dashboard
 ```
-这会打开浏览器界面，你可以：
-
-配置频道（Webhook、WhatsApp、Telegram 等）
-配对节点（让服务器和你现在的电脑连接）
 在你的 Windows PowerShell 中运行：
 ```
 $env:OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
 $env:OPENCLAW_GATEWAY_TOKEN='XXXXc1cb464f68b113f96eec3ade1f585454d'
 openclaw node run --host 192.168.9.64 --port 18789 --display-name '我的Windows'
-```。">
+```
+#服务器**
+```
+ 允许不安全私有连接（内网）
+$env:OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
+
+# 设置 Token
+$env:OPENCLAW_GATEWAY_TOKEN='服务器上的token'
+
+# 连接（服务器的局域网IP，不是 127.0.0.1）
+openclaw node run --host 192.168.9.64 --port 18789 --display-name '我的Windows'
+```
+**3. 服务器批准配对**
+```
+openclaw devices list
+openclaw devices approve <request_id>
+```
+
+**4. 服务器配置**
+- `gateway.bind` 设为 `lan`（不是 0.0.0.0）
+- `tools.exec.host` 设为 `node`
+
+---
+
+### ❌ 避免的错误
+
+| 错误 | 解决方法 |
+|------|----------|
+| Node.js 安装失败 | 用 LTS 版本（v22.x），不是最新版 |
+| 连接被拒绝 | 加 `OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1` |
+| Token 缺失 | 设置 `OPENCLAW_GATEWAY_TOKEN` 环境变量 |
+| 命令超时 | Gateway 绑定模式改为 `lan`，并重启服务 |
+| exec 被拒绝 | 在 Windows 创建 `~/.openclaw/exec-approvals.json` 允许命令 |
+
+---
+
+### 关于 IP 地址
+
+**服务器端**：绑定 `0.0.0.0` 或 `lan`（局域网IP），允许外部连接
+
+**客户端连接服务器**：用服务器的**局域网IP**（如 `192.168.9.64`），不是 `127.0.0.1`
+
+**客户端本地**：用 `127.0.0.1` 是指本地回环，只有本机服务才能用
+
+所以你的理解是对的：
+- 客户端连接服务器 → 用服务器IP（如 192.168.9.64）
+- 客户端本地访问 → 用 127.0.0.1
+
+---
+。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://mtnetworks.github.io/post/zai-%20Windows%20-shang-an-zhuang-%20OpenClaw%20-ke-hu-duan.html">
 <meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
@@ -131,26 +231,88 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><p>快速安装（PowerShell）<br>
+<div class="markdown-body" id="postBody"><h2>Windows 作为 OpenCLAW 客户端 - 完整步骤</h2>
+<h3>✅ 成功步骤</h3>
+<p>安装 Node.js 22 LTS<br>
+下载：<a href="https://nodejs.org/dist/v22.14.0/node-v22.14.0-x64.msi" rel="nofollow">https://nodejs.org/dist/v22.14.0/node-v22.14.0-x64.msi</a><br>
+安装时勾选 "Add to PATH"</p>
+<p><strong>1. 安装 OpenCLAW</strong><br>
 以管理员身份打开 PowerShell，运行：</p>
 <pre class="notranslate"><code class="notranslate">iwr -useb https://openclaw.ai/install.ps1 | iex
 </code></pre>
-<p>这会：</p>
-<p>检查并安装 Node.js 22+<br>
-安装 OpenClaw<br>
+<p>**2. 启动节点连接<br>
 启动配置向导<br>
 安装后配置<br>
-安装完成后，运行：</p>
+安装完成后，运行</p>
 <pre class="notranslate"><code class="notranslate">openclaw dashboard
 </code></pre>
-<p>这会打开浏览器界面，你可以：</p>
-<p>配置频道（Webhook、WhatsApp、Telegram 等）<br>
-配对节点（让服务器和你现在的电脑连接）<br>
-在你的 Windows PowerShell 中运行：</p>
+<p>在你的 Windows PowerShell 中运行：</p>
 <pre class="notranslate"><code class="notranslate">$env:OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
 $env:OPENCLAW_GATEWAY_TOKEN="XXXXc1cb464f68b113f96eec3ade1f585454d"
 openclaw node run --host 192.168.9.64 --port 18789 --display-name "我的Windows"
-</code></pre></div>
+</code></pre>
+<p>#服务器**</p>
+<pre class="notranslate"><code class="notranslate"> 允许不安全私有连接（内网）
+$env:OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
+
+# 设置 Token
+$env:OPENCLAW_GATEWAY_TOKEN="服务器上的token"
+
+# 连接（服务器的局域网IP，不是 127.0.0.1）
+openclaw node run --host 192.168.9.64 --port 18789 --display-name "我的Windows"
+</code></pre>
+<p><strong>3. 服务器批准配对</strong></p>
+<pre class="notranslate"><code class="notranslate">openclaw devices list
+openclaw devices approve &lt;request_id&gt;
+</code></pre>
+<p><strong>4. 服务器配置</strong></p>
+<ul>
+<li><code class="notranslate">gateway.bind</code> 设为 <code class="notranslate">lan</code>（不是 0.0.0.0）</li>
+<li><code class="notranslate">tools.exec.host</code> 设为 <code class="notranslate">node</code></li>
+</ul>
+<hr>
+<h3>❌ 避免的错误</h3>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>错误</th>
+<th>解决方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Node.js 安装失败</td>
+<td>用 LTS 版本（v22.x），不是最新版</td>
+</tr>
+<tr>
+<td>连接被拒绝</td>
+<td>加 <code class="notranslate">OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1</code></td>
+</tr>
+<tr>
+<td>Token 缺失</td>
+<td>设置 <code class="notranslate">OPENCLAW_GATEWAY_TOKEN</code> 环境变量</td>
+</tr>
+<tr>
+<td>命令超时</td>
+<td>Gateway 绑定模式改为 <code class="notranslate">lan</code>，并重启服务</td>
+</tr>
+<tr>
+<td>exec 被拒绝</td>
+<td>在 Windows 创建 <code class="notranslate">~/.openclaw/exec-approvals.json</code> 允许命令</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<hr>
+<h3>关于 IP 地址</h3>
+<p><strong>服务器端</strong>：绑定 <code class="notranslate">0.0.0.0</code> 或 <code class="notranslate">lan</code>（局域网IP），允许外部连接</p>
+<p><strong>客户端连接服务器</strong>：用服务器的<strong>局域网IP</strong>（如 <code class="notranslate">192.168.9.64</code>），不是 <code class="notranslate">127.0.0.1</code></p>
+<p><strong>客户端本地</strong>：用 <code class="notranslate">127.0.0.1</code> 是指本地回环，只有本机服务才能用</p>
+<p>所以你的理解是对的：</p>
+<ul>
+<li>客户端连接服务器 → 用服务器IP（如 192.168.9.64）</li>
+<li>客户端本地访问 → 用 127.0.0.1</li>
+</ul>
+<hr></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
