@@ -72,3 +72,19 @@ openclaw devices approve <request_id>
 - 客户端本地访问 → 用 127.0.0.1
 
 ---
+每次启动 Windows 后，在 PowerShell 运行这3行就行：
+```
+$env:OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
+$env:OPENCLAW_GATEWAY_TOKEN="2757c38a0xxx2ac1cb464f68b113f96eec3ade1f585454d"
+openclaw node run --host 192.168.9.64 --port 18789 --display-name "我的Windows"
+```
+连上后我就能在你电脑上执行操作了。
+
+更方便的方式：可以创建一个 PowerShell 脚本文件（如 connect.ps1），双击运行就行：
+```
+# connect.ps1
+$env:OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
+$env:OPENCLAW_GATEWAY_TOKEN="2xxx8a00dd52ac1cb464f68b113f96eec3ade1f585454d"
+openclaw node run --host 192.168.9.64 --port 18789 --display-name "我的Windows"
+```
+保存后右键 → 使用 PowerShell 运行。

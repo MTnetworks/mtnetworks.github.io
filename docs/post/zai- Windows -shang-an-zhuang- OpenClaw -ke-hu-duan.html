@@ -84,7 +84,13 @@ openclaw devices approve <request_id>
 - 客户端本地访问 → 用 127.0.0.1
 
 ---
-。">
+每次启动 Windows 后，在 PowerShell 运行这3行就行：
+```
+$env:OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
+$env:OPENCLAW_GATEWAY_TOKEN='2757c38a0xxx2ac1cb464f68b113f96eec3ade1f585454d'
+openclaw node run --host 192.168.9.64 --port 18789 --display-name '我的Windows'
+```
+连上后我就能在你电脑上执行操作了。">
 <meta property="og:title" content="在 Windows 上安装 OpenClaw 客户端">
 <meta property="og:description" content="## Windows 作为 OpenCLAW 客户端 - 完整步骤
 
@@ -160,7 +166,13 @@ openclaw devices approve <request_id>
 - 客户端本地访问 → 用 127.0.0.1
 
 ---
-。">
+每次启动 Windows 后，在 PowerShell 运行这3行就行：
+```
+$env:OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
+$env:OPENCLAW_GATEWAY_TOKEN='2757c38a0xxx2ac1cb464f68b113f96eec3ade1f585454d'
+openclaw node run --host 192.168.9.64 --port 18789 --display-name '我的Windows'
+```
+连上后我就能在你电脑上执行操作了。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://mtnetworks.github.io/post/zai-%20Windows%20-shang-an-zhuang-%20OpenClaw%20-ke-hu-duan.html">
 <meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
@@ -312,7 +324,20 @@ openclaw devices approve &lt;request_id&gt;
 <li>客户端连接服务器 → 用服务器IP（如 192.168.9.64）</li>
 <li>客户端本地访问 → 用 127.0.0.1</li>
 </ul>
-<hr></div>
+<hr>
+<p>每次启动 Windows 后，在 PowerShell 运行这3行就行：</p>
+<pre class="notranslate"><code class="notranslate">$env:OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
+$env:OPENCLAW_GATEWAY_TOKEN="2757c38a0xxx2ac1cb464f68b113f96eec3ade1f585454d"
+openclaw node run --host 192.168.9.64 --port 18789 --display-name "我的Windows"
+</code></pre>
+<p>连上后我就能在你电脑上执行操作了。</p>
+<p>更方便的方式：可以创建一个 PowerShell 脚本文件（如 connect.ps1），双击运行就行：</p>
+<pre class="notranslate"><code class="notranslate"># connect.ps1
+$env:OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
+$env:OPENCLAW_GATEWAY_TOKEN="2xxx8a00dd52ac1cb464f68b113f96eec3ade1f585454d"
+openclaw node run --host 192.168.9.64 --port 18789 --display-name "我的Windows"
+</code></pre>
+<p>保存后右键 → 使用 PowerShell 运行。</p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
