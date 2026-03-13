@@ -54,3 +54,5 @@ location / {
 http:// 本地 IP: 端口 → 能正常打开
 https:// 域名 → 也能正常打开
 两个都能用，互不冲突
+
+客户端下载地址：https://download.nextcloud.com/
