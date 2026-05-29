@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="### Window代码
+重要提醒：如果要修改盘符D，只需在下面代码中更改前2个D ，千万不要修改第3个D，否则会出现无法隐藏！
+
+如果想做进一步的隐藏，可以把BAT文件转成EXE，或者通过压缩加密BAT文件。">
+<meta property="og:title" content="隐藏加密的虚拟硬盘">
+<meta property="og:description" content="### Window代码
+重要提醒：如果要修改盘符D，只需在下面代码中更改前2个D ，千万不要修改第3个D，否则会出现无法隐藏！
+
+如果想做进一步的隐藏，可以把BAT文件转成EXE，或者通过压缩加密BAT文件。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mtnetworks.github.io/post/yin-cang-jia-mi-de-xu-ni-ying-pan.html">
+<meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
+<title>隐藏加密的虚拟硬盘</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">隐藏加密的虚拟硬盘</h1>
+<div class="title-right">
+    <a href="https://mtnetworks.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/MTnetworks/mtnetworks.github.io/issues/20" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h3>Window代码</h3>
+<p>重要提醒：如果要修改盘符D，只需在下面代码中更改前2个D ，千万不要修改第3个D，否则会出现无法隐藏！</p>
+<p>如果想做进一步的隐藏，可以把BAT文件转成EXE，或者通过压缩加密BAT文件。解释下下面代码的功能，就是在D盘创建一个虚拟可隐藏的M盘符。</p>
+<pre class="notranslate"><code class="notranslate">@echo off
+set ci=3
+echo.
+echo 注意： 三次输入错误将退出.
+echo.
+:1
+set /p mima=请输入密码：
+if \"%mima%\"==\"password\" goto o
+set /a ci-=1
+if \"%ci%\"==\"0\" cls&amp;echo.&amp;echo =没密码无法进入=&amp;echo.&amp;pause&amp;echo.&amp;exit
+cls&amp;echo.&amp;echo 你还有 %ci% 次机会&amp;echo.&amp;goto 1
+:o
+cls&amp;echo.
+echo= 密码正权确，放行 =
+md D:\RECYCLED\UDrives.{25336920-03F9-11CF-8FD0-00AA00686F13}&gt;NUL
+if exist M:\NUL goto delete
+subst M: D:\RECYCLED\UDrives.{25336920-03F9-11CF-8FD0-00AA00686F13}
+start M:\
+goto end
+:delete
+subst /D M:
+:end
+echo.&amp;pause&amp;exit.
+</code></pre>
+<p>加密版代码：（注意：保存的时候选择ANSI编码，否则会出乱码,密码为password）另存为bat</p>
+<h3>Linux代码</h3>
+<pre class="notranslate"><code class="notranslate">#!/bin/bash
+#==========================================================================
+# Linux 文件夹加密保险箱 (UOS / 麒麟 兼容)
+# 功能：密码保护 → 挂载隐藏目录为可见目录 → 文件管理器自动打开
+#       再次运行 → 卸载并隐藏。完全复刻 Windows bat 的 toggle 逻辑。
+#==========================================================================
+
+set -euo pipefail
+
+# ----- 配置 -----
+CONFIG_DIR="$HOME/.config/folder-locker"
+DATA_ROOT="/media/user/DATA1"                          # 数据盘挂载点（改成你的盘，如 /mnt/DATA）
+DATA_DIR="$DATA_ROOT/.private_vault"       # 真实数据存放在此盘（隐藏）
+MOUNT_POINT="$HOME/私人保险箱"             # 挂载后可见的目录（家目录下，方便访问）
+PASSFILE="$CONFIG_DIR/passhash"
+RECOVERY_FILE="$CONFIG_DIR/recovery_hash"
+MAX_ATTEMPTS=3
+
+# ----- 工具函数 -----
+hash_password() {
+    echo -n "$1" | sha256sum | awk '{print $1}'
+}
+
+generate_recovery_code() {
+    # 生成16位字母数字恢复码，格式: XXXX-XXXX-XXXX-XXXX
+    local code=""
+    for i in 1 2 3 4; do
+        local block=$(head -c 4 /dev/urandom | base64 2&gt;/dev/null | tr -dc 'A-Za-z0-9' | head -c 4)
+        [ -n "$block" ] || block=$(tr -dc 'A-Za-z0-9' &lt; /dev/urandom | head -c 4)  # 兼容 busybox
+        code="${code}${block}"
+        [ $i -lt 4 ] &amp;&amp; code="${code}-"
+    done
+    echo "$code"
+}
+
+reset_password_flow() {
+    echo ""
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "  密码重置"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+    
+    while true; do
+        read -s -p "请输入新密码 (6位以上): " pass1
+        echo ""
+        if [ ${#pass1} -lt 6 ]; then
+            echo "⚠️  密码至少需要6位，请重新设置"
+            echo ""
+            continue
+        fi
+        read -s -p "请再次输入确认: " pass2
+        echo ""
+        if [ "$pass1" != "$pass2" ]; then
+            echo "⚠️  两次输入不一致，请重新设置"
+            echo ""
+            continue
+        fi
+        break
+    done
+    
+    # 更新密码
+    hash_password "$pass1" &gt; "$PASSFILE"
+    
+    # 生成新的恢复码
+    local new_code
+    new_code=$(generate_recovery_code)
+    hash_password "$new_code" &gt; "$RECOVERY_FILE"
+    
+    echo ""
+    echo "✅ 密码重置成功！"
+    echo ""
+    echo "╔══════════════════════════════════════╗"
+    echo "║  🔑 新的恢复密钥（请立即保存！）      ║"
+    echo "║                                      ║"
+    echo "║      $new_code      ║"
+    echo "║                                      ║"
+    echo "║  忘记密码时输入此码即可重置。         ║"
+    echo "║  丢失无法找回，请妥善保管！           ║"
+    echo "╚══════════════════════════════════════╝"
+    echo ""
+    read -p "按 Enter 继续..."
+}
+
+attempt_sudo_mount() {
+    # 尝试多种提权方式
+    if command -v pkexec &amp;&gt;/dev/null; then
+        pkexec mount --bind "$DATA_DIR" "$MOUNT_POINT" 2&gt;/dev/null
+    elif command -v gksudo &amp;&gt;/dev/null; then
+        gksudo mount --bind "$DATA_DIR" "$MOUNT_POINT" 2&gt;/dev/null
+    elif command -v kdesu &amp;&gt;/dev/null; then
+        kdesu mount --bind "$DATA_DIR" "$MOUNT_POINT" 2&gt;/dev/null
+    else
+        sudo mount --bind "$DATA_DIR" "$MOUNT_POINT" 2&gt;/dev/null
+    fi
+}
+
+attempt_sudo_umount() {
+    if command -v pkexec &amp;&gt;/dev/null; then
+        pkexec umount "$MOUNT_POINT" 2&gt;/dev/null
+    elif command -v gksudo &amp;&gt;/dev/null; then
+        gksudo umount "$MOUNT_POINT" 2&gt;/dev/null
+    elif command -v kdesu &amp;&gt;/dev/null; then
+        kdesu umount "$MOUNT_POINT" 2&gt;/dev/null
+    else
+        sudo umount "$MOUNT_POINT" 2&gt;/dev/null
+    fi
+}
+
+open_file_manager() {
+    if command -v dde-file-manager &amp;&gt;/dev/null; then
+        dde-file-manager "$MOUNT_POINT" &amp;
+    elif command -v nautilus &amp;&gt;/dev/null; then
+        nautilus "$MOUNT_POINT" &amp;
+    elif command -v nemo &amp;&gt;/dev/null; then
+        nemo "$MOUNT_POINT" &amp;
+    elif command -v thunar &amp;&gt;/dev/null; then
+        thunar "$MOUNT_POINT" &amp;
+    elif command -v dolphin &amp;&gt;/dev/null; then
+        dolphin "$MOUNT_POINT" &amp;
+    else
+        xdg-open "$MOUNT_POINT" &amp;
+    fi
+}
+
+# ----- 首次运行：设置密码 -----
+if [ ! -f "$PASSFILE" ]; then
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "  首次使用，请设置保险箱密码"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+    
+    while true; do
+        read -s -p "请输入新密码 (6位以上): " pass1
+        echo ""
+        if [ ${#pass1} -lt 6 ]; then
+            echo "⚠️  密码至少需要6位，请重新设置"
+            echo ""
+            continue
+        fi
+        read -s -p "请再次输入确认: " pass2
+        echo ""
+        if [ "$pass1" != "$pass2" ]; then
+            echo "⚠️  两次输入不一致，请重新设置"
+            echo ""
+            continue
+        fi
+        break
+    done
+    
+    # 检查数据盘是否存在
+    if [ ! -d "$DATA_ROOT" ]; then
+        echo ""
+        echo "⚠️  数据盘 $DATA_ROOT 不存在！"
+        echo "   请先挂载数据盘，或修改脚本第 12 行的 DATA_ROOT。"
+        echo ""
+        read -p "按 Enter 退出..."
+        exit 1
+    fi
+    
+    mkdir -p "$CONFIG_DIR"
+    mkdir -p "$DATA_DIR"
+    hash_password "$pass1" &gt; "$PASSFILE"
+    
+    # 生成恢复密钥
+    RECOVERY_CODE=$(generate_recovery_code)
+    hash_password "$RECOVERY_CODE" &gt; "$RECOVERY_FILE"
+    
+    chmod 700 "$CONFIG_DIR"
+    chmod 600 "$PASSFILE"
+    chmod 600 "$RECOVERY_FILE"
+    
+    echo ""
+    echo "✅ 密码设置成功！数据将保存在隐藏目录中。"
+    echo ""
+    echo "╔══════════════════════════════════════╗"
+    echo "║  🔑 恢复密钥（请立即保存！）          ║"
+    echo "║                                      ║"
+    echo "║      $RECOVERY_CODE      ║"
+    echo "║                                      ║"
+    echo "║  忘记密码时输入此码即可重置。         ║"
+    echo "║  丢失无法找回，请妥善保管！           ║"
+    echo "╚══════════════════════════════════════╝"
+    echo ""
+    read -p "按 Enter 退出..."
+    exit 0
+fi
+
+# ----- 密码验证 -----
+STORED_HASH=$(cat "$PASSFILE")
+
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "  保险箱 - 请输入密码解锁"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo "  💡 忘记密码？输入 0 使用恢复密钥"
+echo ""
+
+remaining=$MAX_ATTEMPTS
+while [ $remaining -gt 0 ]; do
+    read -s -p "密码: " input_pass
+    echo ""
+    
+    # 检查是否请求恢复模式
+    if [ "$input_pass" = "0" ]; then
+        recover_flag=1
+        break
+    fi
+    
+    input_hash=$(hash_password "$input_pass")
+    
+    if [ "$input_hash" = "$STORED_HASH" ]; then
+        echo "✅ 密码验证成功！"
+        echo ""
+        recover_flag=0
+        break
+    fi
+    
+    remaining=$((remaining - 1))
+    if [ $remaining -eq 0 ]; then
+        echo ""
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo "  ⛔ 密码错误次数过多"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo ""
+        echo "  是否使用恢复密钥重置？ (y/n)"
+        read -p "  &gt; " use_recovery
+        if [ "$use_recovery" = "y" ] || [ "$use_recovery" = "Y" ]; then
+            recover_flag=1
+            break
+        else
+            echo ""
+            echo "  已取消。"
+            read -p "按 Enter 退出..."
+            exit 1
+        fi
+    fi
+    echo "❌ 密码错误，还剩 $remaining 次机会"
+    echo ""
+done
+
+# ----- 恢复密钥流程 -----
+if [ "${recover_flag:-0}" -eq 1 ]; then
+    STORED_RECOVERY_HASH=$(cat "$RECOVERY_FILE")
+    
+    echo ""
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "  恢复密钥验证"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+    echo "  请输入16位恢复密钥（含连字符 -）"
+    echo ""
+    
+    recovery_attempts=3
+    while [ $recovery_attempts -gt 0 ]; do
+        read -s -p "恢复密钥: " input_recovery
+        echo ""
+        
+        recovery_hash=$(hash_password "$input_recovery")
+        
+        if [ "$recovery_hash" = "$STORED_RECOVERY_HASH" ]; then
+            echo ""
+            echo "✅ 恢复密钥验证通过！"
+            reset_password_flow
+            break
+        fi
+        
+        recovery_attempts=$((recovery_attempts - 1))
+        if [ $recovery_attempts -eq 0 ]; then
+            echo ""
+            echo "⛔ 恢复密钥验证失败，无法访问！"
+            echo ""
+            read -p "按 Enter 退出..."
+            exit 1
+        fi
+        echo "❌ 恢复密钥错误，还剩 $recovery_attempts 次机会"
+        echo ""
+    done
+    
+    # 恢复/重置完成后，重新进入密码验证
+    STORED_HASH=$(cat "$PASSFILE")
+    
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "  保险箱 - 请输入新密码解锁"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+    
+    remaining=$MAX_ATTEMPTS
+    while [ $remaining -gt 0 ]; do
+        read -s -p "密码: " input_pass
+        echo ""
+        
+        input_hash=$(hash_password "$input_pass")
+        
+        if [ "$input_hash" = "$STORED_HASH" ]; then
+            echo "✅ 密码验证成功！"
+            echo ""
+            break
+        fi
+        
+        remaining=$((remaining - 1))
+        if [ $remaining -eq 0 ]; then
+            echo ""
+            echo "⛔ 密码错误次数过多，无法访问！"
+            echo ""
+            read -p "按 Enter 退出..."
+            exit 1
+        fi
+        echo "❌ 密码错误，还剩 $remaining 次机会"
+        echo ""
+    done
+fi
+
+# ----- Toggle: 挂载 或 卸载 -----
+if mountpoint -q "$MOUNT_POINT" 2&gt;/dev/null; then
+    # 已挂载 → 卸载
+    echo "🔒 检测到保险箱已打开，正在锁定..."
+    
+    # 检查目录是否被占用，若有进程占用则提示
+    if lsof "$MOUNT_POINT" 2&gt;/dev/null | grep -q .; then
+        echo "⚠️  有程序正在使用保险箱中的文件，请先关闭后再锁定"
+        read -p "按 Enter 退出..."
+        exit 1
+    fi
+    
+    attempt_sudo_umount
+    echo "🔒 保险箱已锁定（数据已隐藏）"
+    
+else
+    # 未挂载 → 挂载
+    echo "🔓 正在解锁保险箱..."
+    
+    if [ ! -d "$DATA_ROOT" ]; then
+        echo "⚠️  数据盘 $DATA_ROOT 不存在，请先挂载。"
+        echo ""
+        read -p "按 Enter 退出..."
+        exit 1
+    fi
+    
+    if [ ! -d "$DATA_DIR" ]; then
+        mkdir -p "$DATA_DIR"
+    fi
+    
+    if [ ! -d "$MOUNT_POINT" ]; then
+        mkdir -p "$MOUNT_POINT"
+    fi
+    
+    if attempt_sudo_mount; then
+        echo "🔓 保险箱已解锁 → $MOUNT_POINT"
+        echo ""
+        open_file_manager
+        echo "📁 已打开文件管理器"
+        echo ""
+        echo "提示：再次运行此脚本即可锁定保险箱"
+    else
+        echo "⚠️  mount 需要管理员权限，请在弹出的对话框中确认。"
+        echo "    如果授权失败，可以手动运行:"
+        echo "    sudo mount --bind '$DATA_DIR' '$MOUNT_POINT'"
+    fi
+fi
+
+echo ""
+read -p "按 Enter 退出..."
+</code></pre>
+<p>将代码保存为sh</p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://mtnetworks.github.io">铭泰网络的博客</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.disabled=true;
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","MTnetworks/mtnetworks.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+
+
+</html>
